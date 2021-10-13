@@ -44,7 +44,49 @@ class Catalgo
  
        
         this.listaProductos.forEach(producto => {
+ 
+            template.querySelector('img').setAttribute('src', producto.thumbnailUrl)
+            template.querySelector('#title').innerHTML= producto.title
+            template.querySelector('.bottonComprar').setAttribute('idproducto',producto.id)
+
+            const clone = template.cloneNode(true)
+            fragment.appendChild(clone)
+    
+        })
+        contenedorProductos.appendChild(fragment)
+    }
+
+}
+
+class Carrito 
+{
+
+    constructor(){
+
+        this.listaProductos =[]
+    }
+
+    
+    addCarrito = async (producto) => {
+        try{ 
+        
+            this.listaProductos.push(producto);
+        }catch(error){
+            console.error(error)
+        }
+    }
+     
+    
+    MostrarCarrito =  (contendor) => {
+        const contenedorProductos = document.querySelector(contendor)
+
+        const template = document.querySelector('#template-carrito').content
+        const fragment = document.createDocumentFragment()
+ 
+       
+        this.listaProductos.forEach(producto => {
             console.log(producto)
+            debugger;
             template.querySelector('img').setAttribute('src', producto.thumbnailUrl)
             template.querySelector('#title').innerHTML= producto.title
             template.querySelector('#precio').innerHTML="$"+ producto.precio
@@ -57,20 +99,37 @@ class Catalgo
     }
 
 }
+
+
 async function   Cargar()
 {
     catalogo=new Catalgo()
-
+    carrito=new Carrito()
     await catalogo.CargarListaProductos('api.json')
     catalogo.MostrarProductos('#contenedor-productos')
 
 }
+async function MostrarCarrito()
+{
+    document.querySelector('#contenedor-productos').style.display = "none";
+    document.querySelector('#contenedor-carrito').style.visibility = "visible";
+    document.querySelector('#titlePage').innerHTML = "Carrito";
+
+    carrito.MostrarCarrito("#contenedor-carrito");
+
+}
+async function   agregarCarrito(e)
+{
+   let idproducto=e.getAttribute("idproducto")
+   carrito.addCarrito(catalogo.listaProductos.filter(producto=> producto.id== idproducto)[0])
+}
 let catalogo;
+let carrito;
 document.addEventListener("DOMContentLoaded",() => {
   
    Cargar()
 
 })
 
-//👍
+//
 
