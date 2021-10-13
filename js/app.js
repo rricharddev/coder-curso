@@ -79,7 +79,7 @@ class Carrito
     
     MostrarCarrito =  (contendor) => {
         const contenedorProductos = document.querySelector(contendor)
-
+        contenedorProductos.innerHTML="";
         const template = document.querySelector('#template-carrito').content
         const fragment = document.createDocumentFragment()
  
@@ -100,7 +100,15 @@ class Carrito
 
 }
 
+function irCatalogo () {
+    document.querySelector('#contenedor-productos').style.display = "";
+    document.querySelector('#contenedor-carrito').style.display = "none";
+   document.querySelector('#titlePage').innerHTML = "Productos";
+   document.querySelector('#liCatalogo').style.display = "none";
 
+
+
+}
 async function   Cargar()
 {
     catalogo=new Catalgo()
@@ -112,8 +120,9 @@ async function   Cargar()
 async function MostrarCarrito()
 {
     document.querySelector('#contenedor-productos').style.display = "none";
-    document.querySelector('#contenedor-carrito').style.visibility = "visible";
+    document.querySelector('#contenedor-carrito').style.display = "";
     document.querySelector('#titlePage').innerHTML = "Carrito";
+    document.querySelector('#liCatalogo').style.display = "";
 
     carrito.MostrarCarrito("#contenedor-carrito");
 
