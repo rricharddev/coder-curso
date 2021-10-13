@@ -1,0 +1,33 @@
+[
+    {
+      "precio": 500,
+      "id": 1,
+      "title": "Corte",
+      "thumbnailUrl": "https://www.fillmurray.com/640/360"
+    },
+    {
+      "precio": 300,
+      "id": 2,
+      "title": "Color",
+      "thumbnailUrl": "http://placeimg.com/640/360/any"
+    },
+    {
+      "precio": 100,
+      "id": 3,
+      "title": "Balayage",
+      "thumbnailUrl": "http://placeimg.com/640/480/people?t=1633564622943"
+    },
+    {
+      "precio": 50,
+      "id": 4,
+      "title": "manos",
+      "thumbnailUrl": "https://picsum.photos/id/30/600"
+    },
+    {
+      "precio": 10,
+      "id": 5,
+      "title": "Peinado",
+      "thumbnailUrl": "https://picsum.photos/id/40/600"
+    }
+    
+  ]
