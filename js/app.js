@@ -6,6 +6,7 @@ class Producto
         this.id=id     
         this.title=title
         this.thumbnailUrl=thumbnailUrl
+        this.cantidad=1
     }
 
     
@@ -69,8 +70,20 @@ class Carrito
     
     addCarrito = async (producto) => {
         try{ 
-        
+            if(this.listaProductos.find(productoC=>productoC.id==producto.id)==undefined)
             this.listaProductos.push(producto);
+            else {
+                this.listaProductos=this.listaProductos.map((productoC)=>{
+                    if(productoC.id==producto.id) 
+                    {
+                        productoC.cantidad=  productoC.cantidad+1;   
+                    }
+                    return productoC;
+
+
+                })
+
+            }
         }catch(error){
             console.error(error)
         }
@@ -90,6 +103,8 @@ class Carrito
             template.querySelector('img').setAttribute('src', producto.thumbnailUrl)
             template.querySelector('#title').innerHTML= producto.title
             template.querySelector('#precio').innerHTML="$"+ producto.precio
+            template.querySelector('#cantidad').innerHTML=producto.cantidad
+            template.querySelector('#subtotal').innerHTML="$"+ producto.precio*producto.cantidad
 
             const clone = template.cloneNode(true)
             fragment.appendChild(clone)
@@ -100,16 +115,15 @@ class Carrito
 
 }
 
-function irCatalogo () {
-    document.querySelector('#contenedor-productos').style.display = "";
-    document.querySelector('#contenedor-carrito').style.display = "none";
+irCatalogo = ()=> {
+    $('#contenedor-productos').show();
+    $('#contenedor-carrito').hide();
+    $('#liCatalogo').hide();
    document.querySelector('#titlePage').innerHTML = "Productos";
-   document.querySelector('#liCatalogo').style.display = "none";
-
 
 
 }
-async function   Cargar()
+ Cargar=async ()=>
 {
     catalogo=new Catalgo()
     carrito=new Carrito()
@@ -117,28 +131,30 @@ async function   Cargar()
     catalogo.MostrarProductos('#contenedor-productos')
 
 }
-async function MostrarCarrito()
+MostrarCarrito=()=>
 {
-    document.querySelector('#contenedor-productos').style.display = "none";
-    document.querySelector('#contenedor-carrito').style.display = "";
-    document.querySelector('#titlePage').innerHTML = "Carrito";
-    document.querySelector('#liCatalogo').style.display = "";
 
+    $('#contenedor-productos').hide();
+    $('#contenedor-carrito').show();
+    $('#liCatalogo').show();
+    document.querySelector('#titlePage').innerHTML = "Carrito";
     carrito.MostrarCarrito("#contenedor-carrito");
 
 }
-async function   agregarCarrito(e)
+agregarCarrito=(e)=>
 {
    let idproducto=e.getAttribute("idproducto")
    carrito.addCarrito(catalogo.listaProductos.filter(producto=> producto.id== idproducto)[0])
+   alert("Se agrego el producto al carrito")
 }
 let catalogo;
 let carrito;
-document.addEventListener("DOMContentLoaded",() => {
-  
-   Cargar()
+
+$(document).ready(()=>{
+
+    Cargar()
 
 })
-
+ 
 //
 

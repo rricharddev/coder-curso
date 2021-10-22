@@ -13,16 +13,20 @@
     />
     
   </head>
- 
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+  integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+  crossorigin="anonymous"></script>
+
   <body>
     <div class="container">
-        <h1 id="titlePage"class="text-center">Productos</h1>
+        <h1 id="titlePage"class="text-center">TIENDA</h1>
         <a href="#"  onclick="MostrarCarrito()">  carrito</a>
         <a href="#" id="liCatalogo"  onclick="irCatalogo()" style="display:none">  Regresar</a>
 
         <hr>
         <div class="row" id="contenedor-productos"></div>
-        <div class="row" id="contenedor-carrito"></div>
+        <div  id="contenedor-carrito"></div>
 
     </div>
     <template id="template-productos">
@@ -48,20 +52,36 @@
 
 
     <template id="template-carrito" style="display: none;">
-      <div class="col-3 col-md4">
-          <div class="card" >           
-              <img src=""
-               class="card-img-top" width="200" height="200"  alt="..."
-               >
-              <div class="card-body">
-                <h5 id="title" class="card-title">
-                     </h5>
-                <p id="precio"class="card-text"> 
-                  
-                </p>
-        
-                </div>
-          </div>
+      <div class="row">
+        <div class="col-03">
+            <div class="card" >           
+                <img src="" class="card-img-top" width="200" height="200"  alt="..." >
+                <div class="card-body">
+                  <h5 id="title" class="card-title">
+                      </h5>
+                  <p class="card-text"> 
+                    
+                  </p>
+          
+                  </div>
+            </div>
+            
+        </div>
+        <div class="col-03 center-block"  >
+          <h2 id="cantidad"> 
+                    
+          </h2> 
+        </div>
+        <div class="col-03">
+          <h2 id="precio"> 
+                    
+          </h2>
+        </div>
+        <div class="col-03">
+          <h2 id="subtotal"> 
+                    
+          </h2>
+        </div>
       </div>
      
   </template>
